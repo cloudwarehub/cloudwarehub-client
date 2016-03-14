@@ -57,3 +57,8 @@ void MainWindow::windowShow(cip_event_window_show_t *ev)
         window->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     window->show();
 }
+
+void MainWindow::renderFrame(cip_event_window_frame_t *ev, char *data)
+{
+    this->windows[ev->wid]->decode((unsigned char*)data, ev->length);
+}

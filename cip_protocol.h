@@ -72,6 +72,10 @@ typedef struct {
     u8 _pad1[8];
 } cip_event_window_show_t;
 
+typedef struct {
+    u32 wid;
+    u32 length;
+} cip_event_window_frame_t;
 
 
 #endif /* cip_protocol_h */

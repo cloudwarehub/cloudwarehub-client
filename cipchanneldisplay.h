@@ -9,12 +9,18 @@ class CipChannelDisplay : public CipChannel
     Q_OBJECT
 
 
-public slots:
-    void onData();
-
 public:
     CipChannelDisplay(QString ip, quint16 port);
     void run();
+
+private:
+    cip_event_window_frame_t *ev;
+
+signals:
+    void newFrame(cip_event_window_frame_t *ev, char *data);
+
+public slots:
+    void onData();
 
 };
 

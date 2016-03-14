@@ -5,9 +5,7 @@
 CipChannelEvent::CipChannelEvent(QString ip, quint16 port) : CipChannel(ip, port)
 {
     this->type = CIP_CHANNEL_EVENT;
-
     connect(this->socket, SIGNAL(readyRead()), this, SLOT(onData()));
-
 }
 
 void CipChannelEvent::onData()

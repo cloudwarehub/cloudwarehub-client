@@ -17,7 +17,7 @@ CipClient::CipClient(QString ip, quint16 port)
 
 int CipClient::run()
 {
-
+    this->channel_master->cipclient = this;
     this->channel_master->run();
     sleep(1);
     QObject::connect(this->channel_event, SIGNAL(windowCreate(cip_event_window_create_t*)),
@@ -28,8 +28,13 @@ int CipClient::run()
                      this->mainwindow, SLOT(windowShow(cip_event_window_show_t*)));
     QObject::connect(this->channel_event, SIGNAL(windowHide(cip_event_window_hide_t*)),
                      this->mainwindow, SLOT(windowHide(cip_event_window_hide_t*)));
-    this->channel_event->run();
-    this->channel_display->run();
 
     return 0;
+}
+
+void CipClient::initOtherChannels()
+{
+    this->channel_event->run();
+
+    this->channel_display->run();
 }

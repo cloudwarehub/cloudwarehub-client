@@ -12,6 +12,9 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     mainwindow = new MainWindow();
     mainwindow->show();
+
+
+
 //    /* connect to nat server */
 //    QString server_ip = "180.150.186.157";
 //    QHostAddress addr;

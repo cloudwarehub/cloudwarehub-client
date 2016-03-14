@@ -35,11 +35,12 @@ qint64 CipChannel::read(char *data, qint64 maxlen)
     int completed = 0;
     int res;
     while (completed < maxlen) {
-        //res = this->socket->waitForReadyRead();
-        if (res < 0)
-            continue;
+//        res = this->socket->waitForReadyRead();
+//        if (res < 0)
+//            continue;
         res = this->socket->read(&data[completed], maxlen - completed);
         if (res <= 0) {
+            qDebug("read error");
             return -1;
         }
         completed += res;

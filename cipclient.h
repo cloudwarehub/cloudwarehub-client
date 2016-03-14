@@ -21,6 +21,7 @@ public:
     MainWindow *mainwindow;
     CipClient(QString ip, quint16 port);
     int run();
+    void initOtherChannels();
 
 };
 

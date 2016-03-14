@@ -2,11 +2,12 @@
 #include <QObject>
 #include "cipchannelmaster.h"
 #include "cip_protocol.h"
+#include "cipclient.h"
 
 CipChannelMaster::CipChannelMaster(QString ip, quint16 port) : CipChannel(ip, port)
 {
     this->type = CIP_CHANNEL_MASTER;
-
+    this->connected = false;
     connect(this->socket, SIGNAL(readyRead()), this, SLOT(onData()));
 }
 
@@ -19,6 +20,11 @@ int CipChannelMaster::auth(QString token)
 void CipChannelMaster::onData()
 {
     qDebug("master ondata");
+    if(!this->connected){
+        CipClient *c = (CipClient*)this->cipclient;
+        c->initOtherChannels();
+    }
+    this->connected = true;
 }
 
 void CipChannelMaster::run()
