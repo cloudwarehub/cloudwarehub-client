@@ -14,7 +14,7 @@ CipChannelDisplay::CipChannelDisplay(QString ip, quint16 port) : CipChannel(ip, 
 void CipChannelDisplay::onData()
 {
     qDebug("ondata display:%d",this->socket->bytesAvailable());
-
+    int res;
     if (this->ev == NULL) { /* read head first, then frame data */
 
         if (this->socket->bytesAvailable() >= sizeof(cip_event_window_frame_t)) {
@@ -25,7 +25,8 @@ void CipChannelDisplay::onData()
             if (this->socket->bytesAvailable() >= this->ev->length) { /* if frame data is ready to read */
                 qDebug("still");
                 char buf[this->ev->length];
-                this->read(buf, this->ev->length);
+                res = this->read(buf, this->ev->length);
+                qDebug("res:%d",res);
                 if(mainwindow->windows.contains(this->ev->wid))
                     mainwindow->windows[this->ev->wid]->decode((const unsigned char*)buf, this->ev->length);
                 if(this->ev) {

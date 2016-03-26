@@ -26,6 +26,7 @@ private:
     de265_decoder_context *ctx;
     int num;
     QImage* mImg;
+    QImage* qImg;
     ISVCDecoder *pSvcDecoder;
     SBufferInfo sDstBufInfo;
     SParserBsInfo sDstParseInfo;
